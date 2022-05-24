@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.IAddShoppingCartDao">
+    <insert id="insertAddShoppingCart" >
+        insert into addshoppingcart(addShoppingCart_userName,id) values (#{addShoppingCart_userName},#{id})
+    </insert>
+    <insert id="insertMyTracks" >
+        insert into myTracks(myTracks_userName,myTracks_id) values (#{myTracks_userName},#{myTracks_id})
+    </insert>
+    <update id="updateAddShoppingCart">
+        UPDATE addshoppingcart set addShoppingCart_num=#{num}
+        where addShoppingCart_userName=#{addShoppingCart_userName} and id=#{id}
+    </update>
+    <select id="selectByIdAndUserName" resultType="com.xf.demo.bean.AddShoppingCart">
+        select * from addshoppingcart where  addShoppingCart_userName=#{addShoppingCart_userName} and id=#{id}
+    </select>
+    <select id="selectByUserName" resultType="com.xf.demo.bean.AddShoppingCart">
+        select * from addshoppingcart where  addShoppingCart_userName=#{addShoppingCart_userName}
+    </select>
+    <select id="selectPrice" resultType="java.lang.Double">
+        select sum(commodity.price * addshoppingcart.addShoppingCart_num)
+        from commodity
+        inner join addshoppingcart on commodity.id=addshoppingcart.id
+        where addshoppingcart.addShoppingCart_userName=#{addShoppingCart_userName} and addShoppingCart.id=#{id}
+    </select>
+    <delete id="deleteCart" >
+        delete from addshoppingcart where addShoppingCart_userName=#{addShoppingCart_userName} and id=#{id}
+    </delete>
+</mapper>

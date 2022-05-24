@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.ICommodityDao">
+    <insert id="insertCommodity">
+        insert into commodity(img,name,price,productDescribe) values (#{img},#{name},#{price},#{productDescribe})
+    </insert>
+    <update id="updateComm">
+        UPDATE commodity set img=#{img},name=#{name},price=#{price},productDescribe=#{productDescribe}
+        where id=#{id}
+    </update>
+    <select id="seletcAllCommodity" resultType="com.xf.demo.bean.Commodity">
+        select * from commodity
+    </select>
+    <select id="selectByIdCommodity" resultType="com.xf.demo.bean.Commodity">
+        select * from commodity where id=#{id}
+    </select>
+    <select id="selectBykey" resultType="com.xf.demo.bean.Commodity">
+        select * from commodity where concat(name,price) like concat('%',#{key},'%')
+    </select>
+    <select id="selectShoppingCart" resultType="com.xf.demo.bean.Commodity">
+        select DISTINCT *
+        from addshoppingcart
+        inner join user on user.user_name=addShoppingCart.addShoppingCart_userName
+        inner join commodity on commodity.id=addshoppingcart.id
+        where addShoppingCart_userName=#{addShoppingCart.addShoppingCart_userName}
+    </select>
+
+    <select id="selectTracks" resultType="com.xf.demo.bean.Commodity">
+        select DISTINCT *
+        from mytracks
+        inner join user on user.user_name=mytracks.myTracks_userName
+        inner join commodity on commodity.id=mytracks.myTracks_id
+        where mytracks.myTracks_userName=#{myTracks_userName}
+    </select>
+    <select id="selectCollect" resultType="com.xf.demo.bean.Commodity">
+        select DISTINCT *
+        from collect
+        inner join user on user.user_name=collect.collect_userName
+        inner join commodity on commodity.id=collect.collect_id
+        where collect.collect_userName=#{collect_userName}
+    </select>
+    <select id="selectShoppingCartLimit" resultType="com.xf.demo.bean.Commodity">
+        select * from commodity limit #{limit}
+    </select>
+    <select id="selectShoppingAscSort" resultType="com.xf.demo.bean.Commodity">
+        SELECT * from commodity ORDER BY price
+    </select>
+    <select id="selectShoppingDescSort" resultType="com.xf.demo.bean.Commodity">
+        SELECT * from commodity ORDER BY price desc
+    </select>
+    <select id="findall" resultType="com.xf.demo.bean.Commodity">
+        select * from commodity
+    </select>
+    <select id="selectByKey" resultType="com.xf.demo.bean.Commodity">
+        select * from commodity
+        where id like "%${key}%" or name like "%${key}%"
+    </select>
+</mapper>

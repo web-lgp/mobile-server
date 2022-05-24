@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.IIndentDao">
+    <insert id="insertIndent">
+        insert into indent(indentDate,userName,id,addShoppingCart_num) values (#{indentDate},#{userName},#{id},#{addShoppingCart_num})
+    </insert>
+    <update id="updateState">
+        update indent set  obligation=obligation+#{state} where userName=#{userName} and commId=#{id}
+    </update>
+    <update id="updateIndentDate">
+        update indent set indentDate=#{indentDate} where commId=#{commId}
+    </update>
+    <delete id="deleteIndent">
+        delete from indent where userName=#{userName} and commId=#{commId}
+    </delete>
+    <select id="selectIndents" resultType="com.xf.demo.bean.Indent">
+        SELECT  *
+        FROM commodity
+        inner JOIN  indent on commodity.id=indent.id
+        where
+	    indent.userName = #{userName} and indent.obligation=#{state}
+    </select>
+    <select id="selectIndent" resultType="com.xf.demo.bean.Indent">
+        SELECT  *
+        FROM commodity
+        inner JOIN  indent on commodity.id=indent.id
+        where
+	    indent.commId = #{commId}
+    </select>
+    <select id="IndentCount" resultType="java.lang.Integer">
+        select count(obligation) from indent where userName=#{userName} and obligation=#{obligation}
+    </select>
+</mapper>

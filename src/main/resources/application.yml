@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    name: dataSources
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ncres?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+mybatis:
+  type-aliases-package: com.xf.demo.bean
+  mapper-locations: classpath:mapper/*.xml
+file:
+  path: D:\demo\src\main\resources\img\

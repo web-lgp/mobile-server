@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.IMyTracksDao">
+    <insert id="insertMyTracks" >
+        insert into myTracks(myTracks_userName,myTracks_id) values (#{myTracks_userName},#{myTracks_id})
+    </insert>
+    <delete id="deleteMyTracksById">
+        delete from myTracks where myTracks_userName=#{myTracks_userName} and mytracks_id=#{myTracks_id}
+    </delete>
+
+</mapper>

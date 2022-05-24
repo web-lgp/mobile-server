@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.ICollectDao">
+    <insert id="insertCollect" >
+        insert into collect(collect_userName,collect_id) values (#{collect_userName},#{collect_id})
+    </insert>
+    <delete id="deleteCollectById">
+        delete from collect where collect_userName=#{collect_userName} and collect_id=#{collect_id}
+    </delete>
+    <select id="selectCollectById" resultType="java.lang.Boolean">
+        select * from collect where collect_userName=#{collect_userName} and collect_id=#{collect_id}
+    </select>
+
+</mapper>

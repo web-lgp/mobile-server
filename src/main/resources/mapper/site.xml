@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.ISiteDao">
+    <select id="selectSiteAll" resultType="com.xf.demo.bean.Site">
+        select * from site where  userName=#{userName}
+    </select>
+    <insert id="insertSite" parameterType="com.xf.demo.bean.Site">
+        insert into site(userName,province,city,county,name,postalCode,tel,addressDetail,defaultDetail)
+         values (#{userName},#{province},#{city},#{county},#{name},#{postalCode},#{tel},#{addressDetail},#{defaultDetail})
+    </insert>
+    <delete id="deleteSite">
+        delete from site where userName=#{userName} and id=#{id}
+    </delete>
+    <update id="updataSiteisDefault">
+       update site set defaultDetail = case when id=#{id} then 'true' else 'false' end
+    </update>
+    <update id="updataSite">
+       UPDATE site set province=#{province},city=#{city},county=#{county},name=#{name},
+       postalCode=#{postalCode},tel=#{tel},addressDetail=#{addressDetail},defaultDetail=#{defaultDetail}
+      where id=#{id}
+    </update>
+    <update id="updateAddisDefault">
+        update site set defaultDetail="false" where userName=#{userName}
+    </update>
+    <select id="selectDefaultSite" resultType="com.xf.demo.bean.Site">
+        select * from site where userName=#{userName} and defaultDetail="true"
+    </select>
+</mapper>

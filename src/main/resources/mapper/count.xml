@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.demo.dao.ICountDao">
+    <select id="selectCountAll" resultType="com.xf.demo.bean.Count">
+        select addShoppingCart_id from addshoppingcart where  addShoppingCart_userName=#{addShoppingCart_userName}
+    </select>
+    <select id="countUser" resultType="java.lang.Integer">
+        select count(*) from user
+    </select>
+    <select id="countComm" resultType="java.lang.Integer">
+        select count(*) from commodity
+    </select>
+    <select id="countAdmin" resultType="java.lang.Integer">
+        select count(*) from admin
+    </select>
+    <select id="countIndent" resultType="java.lang.Integer">
+        select count(*) from indent
+    </select>
+    <select id="countSite" resultType="java.lang.Integer">
+        select count(*) from site where province=#{province}
+    </select>
+</mapper>
